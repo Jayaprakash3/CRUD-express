@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const swaggerJSDoc = require('swagger-jsdoc');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -30,10 +32,38 @@ app.use('/post', postRouter);
 app.use('/put', putRouter);
 app.use('/delete', deleteRouter);
 
+
+let swaggerDefinition = {
+  info: {
+    title: 'Learning - API Swagger Definition',
+    version: '1.0.0',
+    description: 'Demonstration of Organization Employee Portal API with Swagger',
+  },
+  // host: config.project.url,
+  basePath: '/',
+};
+
+
+// Options for the swagger docs
+let options = {
+  swaggerDefinition: swaggerDefinition,
+  apis: ['./routes/*.js'],
+};
+
+// initialize swagger-jsdoc
+let swaggerSpec = swaggerJSDoc(options);
+
+// serve swagger
+app.get('/swagger.json', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function (err, req, res, next) {
