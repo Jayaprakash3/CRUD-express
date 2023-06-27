@@ -12,6 +12,12 @@ var getRouter = require('./routes/getmethod');
 var postRouter = require('./routes/postmethod');
 var putRouter = require('./routes/putmethod');
 var deleteRouter = require('./routes/deletemethod');
+var deptRouter = require('./routes/department')
+
+
+var mongoose = require("mongoose");
+mongoose.connect('mongodb://localhost/departmentDB');
+
 
 var app = express();
 
@@ -31,6 +37,10 @@ app.use('/get', getRouter);
 app.use('/post', postRouter);
 app.use('/put', putRouter);
 app.use('/delete', deleteRouter);
+app.use('/department', deptRouter);
+
+deptModel = require('./models/deptModel');
+
 
 
 let swaggerDefinition = {
