@@ -1,0 +1,31 @@
+
+db.getCollection("users").aggregate([
+  {
+    $lookup: {
+      'from': "posts",
+      'localField': "_id",
+      'foreignField': "userId",
+      'as': "posts"
+    }
+  },
+  {
+    "$unwind": {
+      'path': "$posts",
+      
+    }
+  },
+  {
+    "$match" : {
+         "posts.title" : "eum et est occaecati"
+    }  
+  },
+  {
+    "$project": {
+        _id:0,
+        name : 1,
+        email : 1,
+      title: "$posts.title",
+      body : "$posts.body"
+    }
+  }
+])
