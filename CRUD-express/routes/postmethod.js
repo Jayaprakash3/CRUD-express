@@ -1,9 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res) {
-    res.send("express is working good")
+
+
+
+router.post('/', function (req, res) {
+    let name = req.query.name;
+    res.send(name)
 });
+
+
+
+
 
 module.exports = router;
 
