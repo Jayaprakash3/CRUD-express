@@ -4,7 +4,7 @@ var router = express.Router();
 
 /**
  * @swagger
- * /get/try:
+ * /get/:
  *   get:
  *     summary: Get all location
  *     tags:
@@ -16,7 +16,7 @@ var router = express.Router();
  *       200:
  *         description: Successfully received all the Location Details.
  */
-router.get('/try', async function (req, res) {
+router.get('/', async function (req, res) {
     // res.send("express is working good")
     var obj = { "name": "jayaprakash", "age": "44" }
     // var response = await locationModel.find();
