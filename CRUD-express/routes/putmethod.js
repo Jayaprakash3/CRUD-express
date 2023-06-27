@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.put('/', function (req, res) {
     let name = req.query.name;
-    // name = "suryaprakash";
+    name = "suryaprakash";
     res.send(name)
 });
 
